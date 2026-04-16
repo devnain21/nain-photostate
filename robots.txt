@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /vault
+Disallow: /my-resume
+
+Host: https://naincsc.netlify.app
+Sitemap: https://naincsc.netlify.app/sitemap.xml
