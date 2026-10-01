@@ -1,0 +1,21 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"
+  GITHUB_PAGES = "false"
+  NEXT_PUBLIC_BASE_PATH = ""
+  NEXT_PUBLIC_SITE_URL = "https://naincsc.in"
+
+[[redirects]]
+  from = "https://naincsc.netlify.app/*"
+  to = "https://naincsc.in/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.naincsc.in/*"
+  to = "https://naincsc.in/:splat"
+  status = 301
+  force = true

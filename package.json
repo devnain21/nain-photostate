@@ -1,0 +1,36 @@
+{
+  "name": "nain-photostate",
+  "version": "1.0.0",
+  "description": "Nain CSC official Next.js app",
+  "author": "Dev Nain",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:netlify": "next build && node -e \"const fs=require('fs'),p=require('path');function c(s,d){fs.mkdirSync(d,{recursive:true});for(const f of fs.readdirSync(s)){const sp=p.join(s,f),dp=p.join(d,f);fs.statSync(sp).isDirectory()?c(sp,dp):fs.copyFileSync(sp,dp)}}if(fs.existsSync('netlify-upload-ready'))fs.rmSync('netlify-upload-ready',{recursive:true});c('out','netlify-upload-ready');console.log('netlify-upload-ready folder is ready to upload!')\"",
+    "build:github-pages": "set GITHUB_PAGES=true&& set NEXT_PUBLIC_BASE_PATH=/CSC&& set NEXT_PUBLIC_SITE_URL=https://naincsc.in&& next build && node -e \"const fs=require('fs'),p=require('path');function c(s,d){fs.mkdirSync(d,{recursive:true});for(const f of fs.readdirSync(s)){const sp=p.join(s,f),dp=p.join(d,f);fs.statSync(sp).isDirectory()?c(sp,dp):fs.copyFileSync(sp,dp)}}if(fs.existsSync('github-pages-ready'))fs.rmSync('github-pages-ready',{recursive:true});c('out','github-pages-ready');console.log('github-pages-ready folder is ready to upload!')\"",
+    "start": "npx --yes serve@latest out -l 3000",
+    "preview": "npm run build && npm run start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "firebase": "^12.11.0",
+    "next": "^15.3.0",
+    "pdfjs-dist": "^3.11.174",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vanilla-tilt": "^1.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.5.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+}

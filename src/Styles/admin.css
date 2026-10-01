@@ -1,0 +1,126 @@
+/* =========================================
+   ADMIN DASHBOARD TABLE STYLES
+========================================= */
+.admin-dashboard { margin-top: 10px; }
+.dashboard-header { text-align: center; margin-bottom: 25px; }
+.dashboard-header h2 { color: #0d6efd; margin: 0 0 5px 0; font-weight: 800; font-size: 24px; }
+.dashboard-header p { color: #475569; font-weight: 600; font-size: 14px; margin: 0; }
+.loading-box { text-align: center; padding: 50px; color: #0d6efd; font-weight: bold; }
+
+/* Glass Container */
+.table-container-glass {
+    background: var(--root-color);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Tabs Styling */
+.tabs-wrapper {
+    display: flex; gap: 10px; margin-bottom: 20px;
+    border-bottom: 2px solid #e2e8f0; padding-bottom: 15px;
+    overflow-x: auto; /* Mobile mein scroll hone ke liye */
+}
+.tab-btn {
+    padding: 10px 20px; border: none; border-radius: 8px;
+    background: var(--root-color); color: #011f18; font-weight: 700; font-size: 14px;
+    cursor: pointer; transition: 0.3s; white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+}
+.tab-btn:hover { background: var(--root-color);
+    color: #0d6efd; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+}
+.badge { background: var(--root-color); color: #1e293b; padding: 2px 8px; border-radius: 20px; font-size: 12px; }
+
+/* Active Tabs Colors */
+.tab-btn.active-tab { color: #0d6efd;background-color: rgba(13, 110, 253, 0.15); }
+.tab-btn.active-tab .badge { background: rgba(255,255,255,0.3); color: white; }
+
+/* Table Styling */
+.table-responsive { overflow-x: auto; }
+.professional-table { width: 100%; border-collapse: collapse; text-align: left; background: var(--root-color); border-radius: 8px; overflow: hidden; }
+.professional-table th { background: var(--root-color); color: #334155; padding: 15px; font-weight: 700; font-size: 14px; border-bottom: 2px solid #cbd5e1; text-transform: uppercase; letter-spacing: 0.5px; }
+.professional-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; font-size: 14px; color: #1e293b; font-weight: 500; vertical-align: middle; }
+ /* Hover Effect */
+
+.title-cell { font-weight: 700 !important; color: #0f172a !important; font-size: 15px !important; }
+.date-cell { color: #0f0624 !important; font-weight: 600 !important; }
+.fees-cell { color: #061c0e !important; font-weight: 700 !important; }
+
+/* Action Button */
+.action-btn {
+    display: inline-block; padding: 8px 15px; background: #0d6efd; color: white;
+    text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 12px;
+    transition: 0.3s; text-align: center;
+}
+.action-btn:hover { background: #0b5ed7; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3); }
+.action-btn i { margin-left: 5px; }
+.empty-msg { text-align: center; padding: 30px !important; color: #64748b; font-weight: 600; }
+
+/* Eligibility Cell & Badge Styling */
+.eligibility-cell { font-size: 13px !important; color: #475569 !important; font-weight: 600 !important; }
+.eligibility-badge {
+    background: var(--root-color); border: 1px solid #cbd5e1;
+    padding: 4px 10px; border-radius: 20px; display: inline-block;
+    color: #190e03; font-size: 12px;
+}
+
+/* =========================================
+   🌙 DARK THEME STYLES FOR ADMIN DASHBOARD
+========================================= */
+
+/* Table Container */
+[data-theme="dark"] .table-container-glass {
+    background: rgba(15, 23, 42, 0.75);
+    border-color: #1e293b;
+}
+[data-theme="dark"] .dashboard-header h2 { color: #f8fafc; }
+[data-theme="dark"] .dashboard-header p { color: #94a3b8; }
+
+/* Table Tabs */
+[data-theme="dark"] .tab-btn {
+    background: #1e293b;
+    color: #cbd5e1;
+}
+[data-theme="dark"] .tab-btn:hover {
+    background: #334155;
+    color: white;
+}
+[data-theme="dark"] .tab-btn .badge {
+    background: #334155;
+    color: #cbd5e1;
+}
+
+/* Professional Table */
+[data-theme="dark"] .professional-table { background: #0f172a; }
+[data-theme="dark"] .professional-table th {
+    background: #020617; /* हेडर एकदम डार्क ब्लैक */
+    color: #cbd5e1;
+    border-bottom: 2px solid #1e293b;
+    font-weight: 600;
+}
+[data-theme="dark"] .professional-table td {
+    border-bottom: 1px solid #1e293b;
+    color: #e5e7eb;
+    font-weight: 500;
+}
+[data-theme="dark"] .professional-table tbody tr:hover {
+    background: #1e293b; /* होवर करने पर डार्क ग्रे हाईलाइट */
+}
+
+/* Table Text Colors */
+[data-theme="dark"] .title-cell { color: #f8fafc !important; font-weight: 600 !important; }
+[data-theme="dark"] .date-cell { color: #cbd5e1 !important; font-weight: 500 !important; }
+[data-theme="dark"] .fees-cell { color: #cbd5e1 !important; font-weight: 500 !important; }
+[data-theme="dark"] .eligibility-cell { color: #94a3b8 !important; font-weight: 500 !important; }
+[data-theme="dark"] .eligibility-badge {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #a5b4fc;
+}
+[data-theme="dark"] .empty-msg { color: #94a3b8; }
+[data-theme="dark"] .nain-new-badge { font-weight: 700; }
+[data-theme="dark"] .nain-blink-alert { font-weight: 600; color: #fca5a5; }
