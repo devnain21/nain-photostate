@@ -4,6 +4,8 @@ import React, { useState, useRef } from 'react';
 
 const ResumeMaker = () => {
   const fileInputRef = useRef(null); // फोटो अपलोड के लिए रेफरेंस
+  const [mobileTab, setMobileTab] = useState('editor'); // 'editor' | 'preview'
+  const [feedbackMsg, setFeedbackMsg] = useState('');
 
   // 1. Career Objectives (वही पुराने Professional Objectives)
   const objectives = [
@@ -40,10 +42,13 @@ const ResumeMaker = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPhoto(reader.result); // फोटो का डेटा सेट करें
+        setFeedbackMsg('फोटो अपलोड हो गई!');
+        setTimeout(() => setFeedbackMsg(''), 2500);
       };
       reader.readAsDataURL(file);
     } else {
-      alert("⚠️ कृपया कोई सही इमेज फाइल चुनें!");
+      setFeedbackMsg('कृपया कोई सही फोटो (JPG/PNG) चुनें!');
+      setTimeout(() => setFeedbackMsg(''), 3000);
     }
   };
 
@@ -83,9 +88,32 @@ const ResumeMaker = () => {
 
   return (
     <div className="resume-builder-container">
-      
+      {/* 📱 MOBILE VIEW TOGGLE TABS (NO-PRINT) */}
+      <div className="resume-mobile-switch no-print">
+        <button
+          type="button"
+          className={`resume-switch-btn ${mobileTab === 'editor' ? 'active' : ''}`}
+          onClick={() => setMobileTab('editor')}
+        >
+          <i className="fas fa-edit"></i> 1. फॉर्म भरें
+        </button>
+        <button
+          type="button"
+          className={`resume-switch-btn ${mobileTab === 'preview' ? 'active' : ''}`}
+          onClick={() => setMobileTab('preview')}
+        >
+          <i className="fas fa-eye"></i> 2. रिज़्यूमे देखें &amp; प्रिंट
+        </button>
+      </div>
+
+      {feedbackMsg && (
+        <div className="resume-toast-msg no-print">
+          {feedbackMsg}
+        </div>
+      )}
+
       {/* 👈 LEFT SIDE: INPUT FORM (नो प्रिंट) */}
-      <div className="resume-editor-panel no-print">
+      <div className={`resume-editor-panel no-print ${mobileTab === 'preview' ? 'mobile-hidden' : ''}`}>
         <div className="editor-header">
           <h2><i className="fas fa-file-signature"></i> Pro Resume Builder</h2>
           <button className="btn-print-master" onClick={handlePrint}>
@@ -190,7 +218,17 @@ const ResumeMaker = () => {
       </div>
 
       {/* 👉 RIGHT SIDE: LIVE A4 PREVIEW (परफेक्ट डिज़ाइन) */}
-      <div className="resume-preview-panel">
+      <div className={`resume-preview-panel ${mobileTab === 'editor' ? 'mobile-hidden' : ''}`}>
+        {/* Quick mobile print floating/inline bar */}
+        <div className="resume-preview-mobile-bar no-print">
+          <button type="button" className="btn-switch-back" onClick={() => setMobileTab('editor')}>
+            <i className="fas fa-arrow-left"></i> फॉर्म में सुधारें
+          </button>
+          <button type="button" className="btn-print-master" onClick={handlePrint}>
+            <i className="fas fa-print"></i> Print / PDF
+          </button>
+        </div>
+
         <div className="a4-resume-paper">
           
           {/* 🌟 NEW HEADER: बाईं तरफ़ डेटा, दाईं तरफ़ फोटो */}

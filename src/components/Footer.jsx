@@ -3,11 +3,12 @@ import Link from 'next/link'
 
 const Footer = () => {
   const quickLinks = [
+    { to: '/forms', label: 'Forms' },
+    { to: '/jobs', label: 'Jobs' },
+    { to: '/tools', label: 'Tools' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
     { to: '/privacy', label: 'Privacy' },
-    { to: '/vault', label: 'Vault' },
-    { to: '/jobs-admin', label: 'Jobs desk' },
   ]
 
   return (
@@ -36,7 +37,11 @@ const Footer = () => {
       </div>
 
       <p className="footer-copy">
-        &copy; 2025 Nain CSC & Online Center. Design by Dev Nain
+        &copy; {new Date().getFullYear()} Nain CSC & Online Center. Design by Dev Nain
+        {' • '}
+        <Link href="/vault" title="Operator Portal" style={{ opacity: 0.35, fontSize: '11px', textDecoration: 'none' }}>
+          <i className="fas fa-lock"></i>
+        </Link>
       </p>
 
       <p className="footer-disclaimer">

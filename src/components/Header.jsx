@@ -8,17 +8,13 @@ const Header = () => {
   const isThemeInitialized = useRef(false)
 
   useEffect(() => {
-    const storedThemeIsDark = localStorage.getItem('theme') === 'dark'
-
-    if (storedThemeIsDark) {
-      document.body.setAttribute('data-theme', 'dark')
-    } else {
-      document.body.removeAttribute('data-theme')
-    }
-
     const frameId = window.requestAnimationFrame(() => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.getAttribute('data-theme') === 'dark' ||
+        localStorage.getItem('theme') === 'dark'
+
+      setIsDarkMode(Boolean(isDark))
       isThemeInitialized.current = true
-      setIsDarkMode(storedThemeIsDark)
     })
 
     return () => window.cancelAnimationFrame(frameId)
@@ -30,9 +26,11 @@ const Header = () => {
     }
 
     if (isDarkMode) {
+      document.documentElement.setAttribute('data-theme', 'dark')
       document.body.setAttribute('data-theme', 'dark')
       localStorage.setItem('theme', 'dark')
     } else {
+      document.documentElement.removeAttribute('data-theme')
       document.body.removeAttribute('data-theme')
       localStorage.setItem('theme', 'light')
     }

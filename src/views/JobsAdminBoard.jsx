@@ -33,6 +33,7 @@ import {
 } from '../lib/job-board'
 import { getDaysLeft, isNewJobItem } from '../lib/job-utils'
 import { getJobCategoryContent, getJobCategoryKey, shouldShowCategoryField } from '../lib/job-category'
+import JobDeadlineAlerts from '../components/JobDeadlineAlerts'
 import '../Styles/jobs-admin.css'
 
 function formatMetaDate(timestamp) {
@@ -325,6 +326,7 @@ export default function JobsAdminBoard() {
   const [draft, setDraft] = useState(createEmptyJobRecord())
   const [feedback, setFeedback] = useState('')
   const [securityOpen, setSecurityOpen] = useState(false)
+  const [alertsOpen, setAlertsOpen] = useState(false)
   const [passwordBusy, setPasswordBusy] = useState(false)
   const [securityError, setSecurityError] = useState('')
   const [passwordForm, setPasswordForm] = useState(initialPasswordForm)
@@ -1018,6 +1020,14 @@ export default function JobsAdminBoard() {
           <Link href="/jobs" className="jobs-admin-ghost-btn"><i className="fas fa-eye"></i> Public View</Link>
           <button
             type="button"
+            className={`jobs-admin-ghost-btn${alertsOpen ? ' active' : ''}`}
+            onClick={() => setAlertsOpen((prev) => !prev)}
+            title="Deadlines & Alerts Monitor"
+          >
+            <i className="fas fa-bell"></i> Alerts Monitor
+          </button>
+          <button
+            type="button"
             className={`jobs-admin-ghost-btn${securityOpen ? ' active' : ''}`}
             onClick={() => setSecurityOpen((previous) => !previous)}
           >
@@ -1074,6 +1084,12 @@ export default function JobsAdminBoard() {
               </button>
             </div>
           </form>
+        </section>
+      )}
+
+      {alertsOpen && (
+        <section style={{ marginBottom: '20px' }}>
+          <JobDeadlineAlerts />
         </section>
       )}
 

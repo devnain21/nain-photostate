@@ -1,11 +1,27 @@
 import './globals.css'
 
+import { Poppins } from 'next/font/google'
 import AppShell from '@/src/components/AppShell'
 import StructuredData from '@/src/components/StructuredData'
 import { buildOrganizationSchema, siteConfig, withBasePath } from '@/src/lib/seo'
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-poppins',
+})
+
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#0d6efd' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+  ],
+}
+
 export const metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
+  manifest: withBasePath('/manifest.webmanifest'),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.shortName}`,
@@ -66,10 +82,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="hi">
+    <html lang="hi" className={poppins.variable} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d){document.documentElement.setAttribute('data-theme','dark');if(document.body){document.body.setAttribute('data-theme','dark');}}}catch(e){}})();`,
+          }}
+        />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="" />
         <link
           rel="stylesheet"
@@ -78,7 +97,7 @@ export default function RootLayout({ children }) {
           referrerPolicy="no-referrer"
         />
       </head>
-      <body style={{ '--site-background-image': `url(${withBasePath('/background.jpg')})` }}>
+      <body style={{ '--site-background-image': `url(${withBasePath('/background.jpg')})` }} suppressHydrationWarning>
         <StructuredData data={buildOrganizationSchema()} />
         <AppShell>{children}</AppShell>
       </body>

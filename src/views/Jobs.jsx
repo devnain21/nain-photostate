@@ -272,6 +272,15 @@ const Jobs = () => {
     </div>
   )
 
+  const urgentJobs = React.useMemo(() => {
+    return jobsData.filter((item) => {
+      const categoryContent = getJobCategoryContent(item.category)
+      if (!categoryContent.hasDeadline || !item.lastdate) return false
+      const days = getDaysLeft(item.lastdate)
+      return days !== null && days >= 0 && days <= 3
+    })
+  }, [jobsData])
+
   return (
     <div className="jobs-page">
 
@@ -290,6 +299,29 @@ const Jobs = () => {
           <div className="jph-stat"><strong>{results.length}</strong><span>Results</span></div>
         </div>
       </div>
+
+      {/* ── Urgent Deadline Alert Banner ── */}
+      {urgentJobs.length > 0 && (
+        <div className="jobs-urgent-alert-bar">
+          <div className="urgent-badge">
+            <i className="fas fa-hourglass-half"></i> लास्ट डेट अलर्ट
+          </div>
+          <div className="urgent-content">
+            <strong>{urgentJobs.length} फॉर्म्स की अंतिम तिथि निकट है:</strong>{' '}
+            <span>{urgentJobs.slice(0, 3).map(j => j.title).join(' • ')}</span>
+          </div>
+          <button
+            type="button"
+            className="urgent-action-btn"
+            onClick={() => {
+              setActiveTab('job')
+              setSortBy('deadline')
+            }}
+          >
+            लास्ट डेट अनुसार देखें
+          </button>
+        </div>
+      )}
 
       {/* ── Tabs ── */}
       <div className="jobs-tabs">

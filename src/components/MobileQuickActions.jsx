@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -8,6 +8,9 @@ import { usePathname } from 'next/navigation'
 import { siteConfig } from '../lib/seo'
 
 const phoneHref = `tel:${siteConfig.phone.replace(/\s+/g, '')}`
+const subscribeNoop = () => () => {}
+
+const useIsClient = () => useSyncExternalStore(subscribeNoop, () => true, () => false)
 
 const isCurrent = (pathname, href) => {
   const current = pathname.replace(/\/+$/, '') || '/'
@@ -17,11 +20,7 @@ const isCurrent = (pathname, href) => {
 
 export default function MobileQuickActions() {
   const pathname = usePathname() || '/'
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useIsClient()
 
   if (!mounted) return null
 

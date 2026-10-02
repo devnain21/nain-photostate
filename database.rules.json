@@ -14,7 +14,7 @@
     },
     "public_job_board": {
       ".read": true,
-      ".write": "auth != null"
+      ".write": "auth != null && (auth.token.email == 'admin@csc.com' || auth.token.email == 'dnain81@gmail.com')"
     }
   }
 }
