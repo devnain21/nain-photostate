@@ -39,8 +39,12 @@ const Footer = () => {
       <p className="footer-copy">
         &copy; {new Date().getFullYear()} Nain CSC & Online Center. Design by Dev Nain
         {' • '}
-        <Link href="/vault" title="Operator Portal" style={{ opacity: 0.35, fontSize: '11px', textDecoration: 'none' }}>
+        <Link href="/vault" title="Grahak Vault" aria-label="Grahak Vault" style={{ opacity: 0.45, fontSize: '12px', textDecoration: 'none' }}>
           <i className="fas fa-lock"></i>
+        </Link>
+        {' '}
+        <Link href="/jobs-admin" title="Jobs Admin" aria-label="Jobs Admin" style={{ opacity: 0.45, fontSize: '12px', textDecoration: 'none', marginLeft: '8px' }}>
+          <i className="fas fa-user-shield"></i>
         </Link>
       </p>
 
